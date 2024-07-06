@@ -8,19 +8,30 @@ import {
 import React from "react";
 
 const FD_Dialog = ({
+  messageText,
+  closeBtnText,
+  actionBtnText,
   isOpen,
-  onClose
+  onClose,
+  handleActionBtn
 }: {
+  messageText: string;
+  closeBtnText?: string;
+  actionBtnText?: string;
   isOpen: boolean;
   onClose: () => void;
+  handleActionBtn?: () => void;
 }) => {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
-          <ModalBody>Are you sure ?</ModalBody>
+          <ModalBody>{messageText}</ModalBody>
           <ModalFooter>
-            <Button>yes</Button>
+            {closeBtnText && <Button onClick={onClose}>{closeBtnText}</Button>}
+            {actionBtnText && handleActionBtn && (
+              <Button onClick={handleActionBtn}>{actionBtnText}</Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>

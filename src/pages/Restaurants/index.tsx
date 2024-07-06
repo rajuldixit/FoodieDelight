@@ -14,6 +14,7 @@ enum RestoActionBtnLabel {
   "ADD" = "Add a restaurant",
   "VIEW" = "View all restaurant"
 }
+
 const restaurantsList = [{ key: 1 }];
 const Restaurants = () => {
   const [actionBtnLabel, setActionBtnLabel] = useState(RestoActionBtnLabel.ADD);
