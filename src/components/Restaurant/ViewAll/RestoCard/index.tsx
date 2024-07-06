@@ -1,4 +1,10 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Button
+} from "@nextui-org/react";
 import FoodImage from "../../../../assets/images/food3.jpg";
 enum FoodCategory {
   "VEG" = "Veg",
@@ -17,10 +23,14 @@ type RestoCardProps = {
 };
 const RestoCard = ({
   resto,
-  onClick
+  onClick,
+  onEdit,
+  onDelete
 }: {
   resto: RestoCardProps;
   onClick: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
 }) => {
   return (
     <Card>
@@ -39,7 +49,20 @@ const RestoCard = ({
         <img src={FoodImage} />
         <p>{resto.description}</p>
       </CardBody>
-      <CardFooter className="text-end cursor-pointer">
+      <CardFooter className="flex justify-between cursor-pointer">
+        <div className="flex gap-2">
+          <Button variant="bordered" color="warning" size="sm" onClick={onEdit}>
+            Edit
+          </Button>
+          <Button
+            variant="bordered"
+            color="danger"
+            size="sm"
+            onClick={onDelete}
+          >
+            Delete
+          </Button>
+        </div>
         <p onClick={onClick}>read more</p>
       </CardFooter>
     </Card>

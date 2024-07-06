@@ -32,7 +32,7 @@ const Restaurants = () => {
     <>
       <div className="h-screen">
         {restaurantsList.length === 0 && (
-          <div className="w-full p-4">
+          <div className="w-full p-x-4rem py-4">
             <div className="flex justify-center">
               <img src={FoodImage} alt="food-image" />
             </div>

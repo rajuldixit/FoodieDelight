@@ -1,5 +1,6 @@
 // tailwind.config.js
 const { nextui } = require("@nextui-org/react");
+const withMT = require("@material-tailwind/react/utils/withMT");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,8 +12,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-      padding: {
-        xxl: "4rem"
+      screens: {
+        sm: "576px",
+        md: "960px",
+        lg: "1440px"
       }
     }
   },

@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import FoodImage from "./../../../../assets/images/food2.jpg";
+import FD_Rating from "../../../../shared_components/FD_Rating";
 enum FoodCategory {
   "VEG" = "Veg",
   "NON_VEG" = "Non Veg",
@@ -76,7 +77,7 @@ const RestoDetails = ({
 }) => {
   return (
     <>
-      <Card className="p-4">
+      <Card className="p-2 sm:p-6 md:p-6">
         <Button
           onClick={viewAll}
           className="w-2"
@@ -112,7 +113,9 @@ const RestoDetails = ({
                         </div>
                         <div>
                           <h6 className="block">{dish.price}</h6>
-                          <p className="block">{dish.rating}</p>
+                          <p className="block">
+                            <FD_Rating />
+                          </p>
                         </div>
                       </div>
                     </div>

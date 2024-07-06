@@ -1,6 +1,7 @@
 import RestoCard from "./RestoCard";
 import { useState } from "react";
 import RestoDetails from "./RestoDetails";
+import FD_Dialog from "../../../shared_components/FD_Dialog";
 enum FoodCategory {
   "VEG" = "Veg",
   "NON_VEG" = "Non Veg",
@@ -52,11 +53,18 @@ const ResaurantList = [
 const ViewAll = () => {
   const [isReadMoreActive, setIsReadMoreActive] = useState(false);
   const [activeRestoId, setActiveRestoId] = useState("");
-  const onHandleReadMore = (id: string) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleReadMore = (id: string) => {
     setIsReadMoreActive(true);
     setActiveRestoId(id);
   };
-  console.log("is read more :", isReadMoreActive);
+  const handleEditResto = (id: string) => {};
+  const handleDeleteResto = (id: string) => {
+    setShowDeleteModal(true);
+  };
+  const handleCloseDeleteDialog = () => {
+    setShowDeleteModal(false);
+  };
   return (
     <>
       {!isReadMoreActive ? (
@@ -66,7 +74,9 @@ const ViewAll = () => {
               <RestoCard
                 resto={resto}
                 key={resto.id}
-                onClick={() => onHandleReadMore(resto.id)}
+                onClick={() => handleReadMore(resto.id)}
+                onEdit={() => handleEditResto(resto.id)}
+                onDelete={() => handleDeleteResto(resto.id)}
               />
             </div>
           ))}
@@ -79,6 +89,7 @@ const ViewAll = () => {
           />
         </div>
       )}
+      <FD_Dialog isOpen={showDeleteModal} onClose={handleCloseDeleteDialog} />
     </>
   );
 };
