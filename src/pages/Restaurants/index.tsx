@@ -18,6 +18,7 @@ const restaurantsList = [{ key: 1 }];
 const Restaurants = () => {
   const [actionBtnLabel, setActionBtnLabel] = useState(RestoActionBtnLabel.ADD);
   const [activeAction, setActiveAction] = useState(RestoAction.VIEW);
+  const [mode, setMode] = useState(RestoAction.ADD.toString());
 
   const toggleActiveAction = () => {
     activeAction === RestoAction.VIEW
@@ -28,23 +29,42 @@ const Restaurants = () => {
       ? setActionBtnLabel(RestoActionBtnLabel.VIEW)
       : setActionBtnLabel(RestoActionBtnLabel.ADD);
   };
+  const handleActionBtn = () => {
+    setMode(RestoAction.ADD.toString());
+    toggleActiveAction();
+  };
+  const handleEditResto = (id: string) => {
+    console.log(id);
+    setMode(RestoAction.EDIT.toString());
+    toggleActiveAction();
+  };
   return (
     <>
       <div className="h-screen">
         {restaurantsList.length === 0 && (
           <div className="w-full p-x-4rem py-4">
-            <div className="flex justify-center">
-              <img src={FoodImage} alt="food-image" />
-            </div>
-            <div className="flex justify-center py-4">
-              <Button
-                color="primary"
-                variant="ghost"
-                className="border-width-large"
-              >
-                {actionBtnLabel}
-              </Button>
-            </div>
+            {activeAction === RestoAction.VIEW && (
+              <div className="w-full p-x-4rem py-4">
+                <div className="flex justify-center">
+                  <img src={FoodImage} alt="food-image" />
+                </div>
+                <div className="flex justify-center py-4">
+                  <Button
+                    color="primary"
+                    variant="ghost"
+                    className="border-width-large"
+                    onClick={handleActionBtn}
+                  >
+                    {actionBtnLabel}
+                  </Button>
+                </div>
+              </div>
+            )}
+            {activeAction === RestoAction.ADD && (
+              <div className="pt-2">
+                <AddEdit mode={"0"} />
+              </div>
+            )}
           </div>
         )}
         {restaurantsList.length > 0 && (
@@ -52,7 +72,7 @@ const Restaurants = () => {
             <div className="flex justify-between">
               <Search />
               <Button
-                onClick={toggleActiveAction}
+                onClick={handleActionBtn}
                 color="primary"
                 variant="ghost"
                 className="border-width-large"
@@ -63,12 +83,12 @@ const Restaurants = () => {
 
             {activeAction === RestoAction.VIEW && (
               <div className="pt-2">
-                <ViewAll />
+                <ViewAll onEdit={handleEditResto} />
               </div>
             )}
             {activeAction === RestoAction.ADD && (
               <div className="pt-2">
-                <AddEdit />
+                <AddEdit mode={mode} />
               </div>
             )}
           </div>

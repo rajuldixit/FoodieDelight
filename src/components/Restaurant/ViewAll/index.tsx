@@ -50,7 +50,7 @@ const ResaurantList = [
     category: FoodCategory.VEGAN
   }
 ];
-const ViewAll = () => {
+const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   const [isReadMoreActive, setIsReadMoreActive] = useState(false);
   const [activeRestoId, setActiveRestoId] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -58,7 +58,6 @@ const ViewAll = () => {
     setIsReadMoreActive(true);
     setActiveRestoId(id);
   };
-  const handleEditResto = (id: string) => {};
   const handleDeleteResto = (id: string) => {
     setShowDeleteModal(true);
   };
@@ -75,7 +74,7 @@ const ViewAll = () => {
                 resto={resto}
                 key={resto.id}
                 onClick={() => handleReadMore(resto.id)}
-                onEdit={() => handleEditResto(resto.id)}
+                onEdit={() => onEdit(resto.id)}
                 onDelete={() => handleDeleteResto(resto.id)}
               />
             </div>
