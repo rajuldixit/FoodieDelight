@@ -1,11 +1,8 @@
 import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import FoodImage from "./../../../../assets/images/food2.jpg";
 import FD_Rating from "../../../../shared_components/FD_Rating";
-enum FoodCategory {
-  "VEG" = "Veg",
-  "NON_VEG" = "Non Veg",
-  "VEGAN" = "Vegan"
-}
+import { FoodCategory } from "../../../../utils/constants";
+
 const RestoCardDetails = {
   id: "Punjab001",
   name: "Punjabi Rasoi",

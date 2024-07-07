@@ -5,12 +5,13 @@ import { useState } from "react";
 import RestoCard from "./RestoCard";
 import RestoDetails from "./RestoDetails";
 import FD_Dialog from "../../../shared_components/FD_Dialog";
-import { CANCEL, DELETE, DELETE_RESTO_TEXT } from "../../../utils/constants";
-enum FoodCategory {
-  "VEG" = "Veg",
-  "NON_VEG" = "Non Veg",
-  "VEGAN" = "Vegan"
-}
+import {
+  CANCEL,
+  DELETE,
+  DELETE_RESTO_TEXT,
+  FoodCategory
+} from "../../../utils/constants";
+import "./index.css";
 
 const ResaurantList = [
   {
@@ -82,9 +83,9 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   return (
     <>
       {!isReadMoreActive ? (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid resto-grid gap-4">
           {restoList.map((resto) => (
-            <div className="col-span-1">
+            <div className="col-span-1" key={resto.id}>
               <RestoCard
                 resto={resto}
                 key={resto.id}

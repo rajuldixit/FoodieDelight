@@ -7857,7 +7857,7 @@ video {
   background-color: hsl(var(--nextui-danger-400) / 0.2);
 }
 
-@media (min-width: 576px) {
+@media (min-width: 480px) {
   .sm\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
