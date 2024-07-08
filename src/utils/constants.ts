@@ -9,6 +9,7 @@ const DELETE = "Delete";
 const EDIT = "Edit";
 const READ_MORE = "read more";
 const SAVE = "Save";
+const GENERIC_ERROR_MESSAGE = "Something went wrong !!";
 
 const ERROR_MESSAGES = {
   RESTO_NAME_REQUIRED: "Resto name is required",
@@ -50,6 +51,7 @@ export {
   READ_MORE,
   SAVE,
   ERROR_MESSAGES,
+  GENERIC_ERROR_MESSAGE,
   FoodCategory,
   FormFieldTypes
 };
