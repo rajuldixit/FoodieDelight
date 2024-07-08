@@ -14,9 +14,11 @@ import {
 import "./index.css";
 import useRestoData from "../../../hooks/useRestoData";
 import { RestoCardProps } from "../types";
+import { useDeleteRestoMutation } from "../../../services/RestoApi";
 
 const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   const { restoList, isFetching, isError } = useRestoData();
+  const [deleteResto] = useDeleteRestoMutation();
   const [isReadMoreActive, setIsReadMoreActive] = useState(false);
   const [activeResto, setActiveResto] = useState<RestoCardProps>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -37,13 +39,11 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   const handleCloseDeleteDialog = () => {
     setShowDeleteModal(false);
   };
-  const handleDeleteAction = () => {
+  const handleDeleteAction = async () => {
     setShowDeleteModal(false);
-    const newResto = restaurantData.filter(
-      (resto) => resto.id !== restoToDelete
-    );
-
-    setRestaurantData(newResto);
+    try {
+      await deleteResto(restoToDelete).unwrap();
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -61,13 +61,13 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
       {!isReadMoreActive ? (
         <div className="grid resto-grid gap-4">
           {restoList.map((resto) => (
-            <div className="col-span-1" key={resto.id}>
+            <div className="col-span-1" key={resto.restoId}>
               <RestoCard
                 resto={resto}
                 key={resto.restoId}
                 onClick={() => handleReadMore(resto.restoId)}
-                onEdit={() => onEdit(resto.id)}
-                onDelete={() => handleDeleteResto(resto.id)}
+                onEdit={() => onEdit(resto.restoId)}
+                onDelete={() => handleDeleteResto(resto.restoId)}
               />
             </div>
           ))}

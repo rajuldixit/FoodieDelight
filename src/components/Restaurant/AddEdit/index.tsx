@@ -7,12 +7,17 @@ import { MenuForm, RestoForm } from "./types";
 import RestaurantMenuForm from "./RestaurantMenuForm";
 import { useAddRestoMutation } from "../../../services/RestoApi";
 
-const AddEdit = ({ mode }: { mode: string }) => {
+const AddEdit = ({
+  mode,
+  onCancel
+}: {
+  mode: string;
+  onCancel: () => void;
+}) => {
   const [basicFormData, setBasicFormData] = useState<RestoForm>();
   const [menuFormData, setMenuFormData] = useState<MenuForm>();
   const [isNext, setIsNext] = useState(false);
   const [addResto, { isLoading: isUpdating }] = useAddRestoMutation();
-  const onCancel = () => {};
 
   const AddResto = (data: MenuForm) => {
     setMenuFormData(data);
@@ -25,10 +30,7 @@ const AddEdit = ({ mode }: { mode: string }) => {
   const saveNew = async (obj) => {
     try {
       await addResto({ resto: obj }).unwrap();
-      console.log("its done");
-    } catch {
-      console.log("its not done");
-    }
+    } catch {}
   };
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const AddEdit = ({ mode }: { mode: string }) => {
   }, [menuFormData]);
 
   if (isUpdating) {
-    console.log("updating");
+    return <div>Updating..</div>;
   }
 
   return (

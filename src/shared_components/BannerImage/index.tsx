@@ -1,7 +1,7 @@
-import bannerFoodImage from "../../assets/images/food1.jpg";
+import bannerfoodimage from "../../assets/images/food1.jpg";
 
 const BannerImage = () => {
-  return <img src={bannerFoodImage} alt="banner-image" />;
+  return <img src={bannerfoodimage} alt="banner-image" />;
 };
 
 export default BannerImage;

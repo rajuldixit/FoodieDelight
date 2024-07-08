@@ -23,6 +23,13 @@ export const restoApi = createApi({
     addResto: builder.mutation<any, any>({
       query: (body) => createRequest("/resto/addResto", "POST", body),
       invalidatesTags: ["resto"]
+    }),
+    deleteResto: builder.mutation<any, any>({
+      query: (restoId) => ({
+        url: `resto/deleteResto/${restoId}`,
+        method: "DELETE"
+      }),
+      invalidatesTags: ["resto"]
     })
   })
 });
@@ -30,5 +37,6 @@ export const restoApi = createApi({
 export const {
   useGetAllRestoQuery,
   useLazyGetRestoByIdQuery,
-  useAddRestoMutation
+  useAddRestoMutation,
+  useDeleteRestoMutation
 } = restoApi;

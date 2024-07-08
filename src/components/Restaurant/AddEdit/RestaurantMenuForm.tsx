@@ -50,14 +50,16 @@ const RestaurantMenuForm = ({
           </section>
         ))}
       </div>
-      <Button
-        onClick={() =>
-          append({ name: "", price: "", description: "", rating: "" })
-        }
-      >
-        Add Menu
-      </Button>
-      <Button type="submit">Save</Button>
+      <div className="flex justify-end items-center gap-2 mt-2">
+        <Button
+          onClick={() =>
+            append({ name: "", price: "", description: "", rating: "" })
+          }
+        >
+          Add Menu
+        </Button>
+        <Button type="submit">Save</Button>
+      </div>
     </form>
   );
 };

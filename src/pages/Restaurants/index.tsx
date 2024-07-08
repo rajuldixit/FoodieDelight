@@ -40,7 +40,6 @@ const Restaurants = () => {
     toggleActiveAction();
   };
   const handleEditResto = (id: string) => {
-    console.log(id);
     setMode(RestoAction.EDIT.toString());
     toggleActiveAction();
   };
@@ -66,6 +65,9 @@ const Restaurants = () => {
                 <div className="flex justify-center">
                   <img src={FoodImage} alt="food-image" />
                 </div>
+                <h2 className="text-center mt-2 mb-2">
+                  Looks like It's empty ! Lets add some restaurants.
+                </h2>
                 <div className="flex justify-center py-4">
                   <Button
                     color="primary"
@@ -80,7 +82,7 @@ const Restaurants = () => {
             )}
             {activeAction === RestoAction.ADD && (
               <div className="pt-2">
-                <AddEdit mode={"0"} />
+                <AddEdit mode={"0"} onCancel={toggleActiveAction} />
               </div>
             )}
           </div>
@@ -106,7 +108,7 @@ const Restaurants = () => {
             )}
             {activeAction === RestoAction.ADD && (
               <div className="pt-2">
-                <AddEdit mode={mode} />
+                <AddEdit mode={mode} onCancel={toggleActiveAction} />
               </div>
             )}
           </div>

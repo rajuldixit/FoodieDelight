@@ -81,8 +81,10 @@ const RestaurantBasicForm = ({
           </div>
         ))}
       </div>
-      <Button onClick={onCancel}>Cancel</Button>
-      <Button type="submit">Save</Button>
+      <div className="flex justify-end items-center gap-2">
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button type="submit">Save</Button>
+      </div>
     </form>
   );
 };
