@@ -1,5 +1,5 @@
 //external
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //internal
 import RestoCard from "./RestoCard";
@@ -12,59 +12,23 @@ import {
   FoodCategory
 } from "../../../utils/constants";
 import "./index.css";
+import useRestoData from "../../../hooks/useRestoData";
+import { RestoCardProps } from "../types";
 
-const ResaurantList = [
-  {
-    id: "Punjab001",
-    name: "Punjabi Rasoi",
-    description: "This is the most oldest dine place.",
-    location: {
-      area: "Sector 15",
-      city: "Agra"
-    },
-    category: FoodCategory.VEG
-  },
-  {
-    id: "Choko001",
-    name: "Choko Jeeman",
-    description: "This is the most oldest dine place.",
-    location: {
-      area: "Sector 15",
-      city: "Agra"
-    },
-    category: FoodCategory.NON_VEG
-  },
-  {
-    id: "Raj001",
-    name: "Raj Rasoi",
-    description: "This is the most oldest dine place.",
-    location: {
-      area: "Sector 15",
-      city: "Agra"
-    },
-    category: FoodCategory.VEGAN
-  },
-  {
-    id: "Bom001",
-    name: "Bombay Tadka",
-    description: "This is the most oldest dine place.",
-    location: {
-      area: "Sector 15",
-      city: "Agra"
-    },
-    category: FoodCategory.VEGAN
-  }
-];
 const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
+  const { restoList, isFetching, isError } = useRestoData();
   const [isReadMoreActive, setIsReadMoreActive] = useState(false);
-  const [activeRestoId, setActiveRestoId] = useState("");
+  const [activeResto, setActiveResto] = useState<RestoCardProps>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [restoToDelete, setRestoToDelete] = useState("");
-  const [restoList, setRestoList] = useState(ResaurantList);
+  const [restaurantData, setRestaurantData] = useState([]);
 
   const handleReadMore = (id: string) => {
+    const selectedResto = restaurantData.filter(
+      (resto) => resto.restoId === id
+    );
+    setActiveResto(selectedResto[0]);
     setIsReadMoreActive(true);
-    setActiveRestoId(id);
   };
   const handleDeleteResto = (id: string) => {
     setRestoToDelete(id);
@@ -75,11 +39,23 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   };
   const handleDeleteAction = () => {
     setShowDeleteModal(false);
-    const newResto = ResaurantList.filter(
+    const newResto = restaurantData.filter(
       (resto) => resto.id !== restoToDelete
     );
-    setRestoList(newResto);
+
+    setRestaurantData(newResto);
   };
+
+  useEffect(() => {
+    setRestaurantData(restoList);
+  }, [restoList]);
+
+  if (isFetching) {
+    return <div>loading...</div>;
+  }
+  if (isError) {
+    return <div>Error...</div>;
+  }
   return (
     <>
       {!isReadMoreActive ? (
@@ -88,8 +64,8 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
             <div className="col-span-1" key={resto.id}>
               <RestoCard
                 resto={resto}
-                key={resto.id}
-                onClick={() => handleReadMore(resto.id)}
+                key={resto.restoId}
+                onClick={() => handleReadMore(resto.restoId)}
                 onEdit={() => onEdit(resto.id)}
                 onDelete={() => handleDeleteResto(resto.id)}
               />
@@ -99,7 +75,7 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
       ) : (
         <div>
           <RestoDetails
-            activeRestoId={activeRestoId}
+            activeResto={activeResto}
             viewAll={() => setIsReadMoreActive(false)}
           />
         </div>

@@ -12,17 +12,8 @@ import {
   FoodCategory,
   READ_MORE
 } from "../../../../utils/constants";
+import { RestoCardProps } from "../../types";
 
-type RestoCardProps = {
-  id: string;
-  name: string;
-  description: string;
-  location: {
-    area: string;
-    city: string;
-  };
-  category: string;
-};
 const RestoCard = ({
   resto,
   onClick,
@@ -37,10 +28,10 @@ const RestoCard = ({
   return (
     <Card>
       <CardHeader className="flex justify-between">
-        <h6>{resto.name}</h6>
-        {resto.category === FoodCategory.VEG ? (
+        <h6>{resto?.basicDetails?.name}</h6>
+        {resto?.basicDetails?.category === FoodCategory.VEG ? (
           <div className="rounded-circle bg-success w-4 h-4"></div>
-        ) : resto.category === FoodCategory.NON_VEG ? (
+        ) : resto.basicDetails.category === FoodCategory.NON_VEG ? (
           <div className="rounded-circle bg-danger w-4 h-4"></div>
         ) : (
           <div className="rounded-circle bg-warning w-4 h-4"></div>
@@ -48,7 +39,7 @@ const RestoCard = ({
       </CardHeader>
       <CardBody>
         <img src={FoodImage} />
-        <p>{resto.description}</p>
+        <p>{resto.basicDetails.description}</p>
       </CardBody>
       <CardFooter className="flex justify-between cursor-pointer">
         <div className="flex gap-2">

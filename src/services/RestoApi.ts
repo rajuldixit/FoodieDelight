@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = "";
+const baseUrl = "http://localhost:3000/api";
 
 const createRequest = (url: string, method = "GET", body = {}) => ({
   url,
@@ -13,15 +13,15 @@ export const restoApi = createApi({
   tagTypes: ["resto"],
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getAllResto: builder.query<any, null>({
-      query: () => createRequest("api/resto/getAll"),
+    getAllResto: builder.query<any, number>({
+      query: () => "/resto/getAll",
       providesTags: ["resto"]
     }),
     getRestoById: builder.query<any, string>({
-      query: (restoId: string) => createRequest(`/api/resto/getById=${restoId}`)
+      query: (restoId: string) => createRequest(`/resto/getById=${restoId}`)
     }),
     addResto: builder.mutation<any, any>({
-      query: (body) => createRequest("/api/resto/addNew", "POST", body),
+      query: (body) => createRequest("/resto/addResto", "POST", body),
       invalidatesTags: ["resto"]
     })
   })

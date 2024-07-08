@@ -1,9 +1,12 @@
 import { Button, Card, CardHeader } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddEdit from "../../components/Restaurant/AddEdit";
 import Search from "../../components/Restaurant/Search";
 import FoodImage from "../../assets/images/food4.png";
 import ViewAll from "../../components/Restaurant/ViewAll";
+import { useGetAllRestoQuery } from "../../services/RestoApi";
+import data from "./../../../../server/node_modules/type-fest/source/readonly-deep.d";
+import useRestoData from "../../hooks/useRestoData";
 
 enum RestoAction {
   "ADD",
@@ -15,11 +18,13 @@ enum RestoActionBtnLabel {
   "VIEW" = "View all restaurant"
 }
 
-const restaurantsList = [{ key: 1 }];
 const Restaurants = () => {
   const [actionBtnLabel, setActionBtnLabel] = useState(RestoActionBtnLabel.ADD);
   const [activeAction, setActiveAction] = useState(RestoAction.VIEW);
   const [mode, setMode] = useState(RestoAction.ADD.toString());
+
+  const { restoList, isError, isFetching } = useRestoData();
+  const [restaurantsList, setRestaurantsList] = useState([]);
 
   const toggleActiveAction = () => {
     activeAction === RestoAction.VIEW
@@ -39,6 +44,18 @@ const Restaurants = () => {
     setMode(RestoAction.EDIT.toString());
     toggleActiveAction();
   };
+
+  useEffect(() => {
+    setRestaurantsList(restoList);
+  }, [restoList]);
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+  if (isFetching) {
+    return <div>loading...</div>;
+  }
+
   return (
     <>
       <div className="h-screen">

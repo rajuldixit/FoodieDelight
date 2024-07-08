@@ -33,20 +33,21 @@ const RestaurantMenuForm = ({
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className="grid resto-grid gap-2">
         {fields.map((field, index) => (
-          <div key={field.id}>
-            <section className={"section"} key={field.id}>
-              {MenuFormObject.map((menu) => (
-                <div className="col-span-1" key={`${field.id}${index}`}>
-                  {getFormElement(
-                    menu,
-                    register,
-                    errors,
-                    `menu[${index}].${menu.name}`
-                  )}
-                </div>
-              ))}
-            </section>
-          </div>
+          <section className={"section"} key={`${field.id}${index}+1`}>
+            {MenuFormObject.map((menu) => (
+              <div
+                className="col-span-1"
+                key={`${field.id}${index}${menu.name}`}
+              >
+                {getFormElement(
+                  menu,
+                  register,
+                  errors,
+                  `menu[${index}].${menu.name}`
+                )}
+              </div>
+            ))}
+          </section>
         ))}
       </div>
       <Button
