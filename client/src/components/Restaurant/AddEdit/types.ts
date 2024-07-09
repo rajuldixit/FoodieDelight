@@ -47,19 +47,19 @@ type IFormObject = {
 // ** FormObject ** //
 
 const FormObject: IFormObject[] = [
-  {
-    name: "restoId",
-    label: "Resto Id",
-    type: "text",
-    size: "small",
-    className: "",
-    formFieldType: FormFieldTypes.INPUT.toString(),
-    placeholder: "",
-    isDisabled: true
-  },
+  // {
+  //   name: "restoId",
+  //   label: "Resto Id",
+  //   type: "text",
+  //   size: "small",
+  //   className: "",
+  //   formFieldType: FormFieldTypes.INPUT.toString(),
+  //   placeholder: "",
+  //   isDisabled: true
+  // },
   {
     name: "name",
-    label: "Resto Name",
+    label: "Resto Name *",
     type: "text",
     size: "small",
     className: "",
@@ -68,7 +68,7 @@ const FormObject: IFormObject[] = [
   },
   {
     name: "category",
-    label: "Category",
+    label: "Category *",
     type: "text",
     size: "small",
     className: "",
@@ -83,7 +83,7 @@ const FormObject: IFormObject[] = [
 
   {
     name: "location.area",
-    label: "Area",
+    label: "Area *",
     type: "text",
     size: "small",
     className: "",
@@ -92,7 +92,7 @@ const FormObject: IFormObject[] = [
   },
   {
     name: "location.city",
-    label: "City",
+    label: "City *",
     type: "text",
     size: "small",
     className: "",
@@ -111,7 +111,7 @@ const FormObject: IFormObject[] = [
   },
   {
     name: "registrationNo",
-    label: "Registration No",
+    label: "Registration No *",
     type: "text",
     size: "small",
     className: "",
@@ -120,7 +120,7 @@ const FormObject: IFormObject[] = [
   },
   {
     name: "owner.name",
-    label: "Owner Name",
+    label: "Owner Name *",
     type: "text",
     size: "small",
     className: "",
@@ -129,7 +129,7 @@ const FormObject: IFormObject[] = [
   },
   {
     name: "owner.email",
-    label: "Owner Email",
+    label: "Owner Email *",
     type: "text",
     size: "small",
     className: "",
@@ -150,7 +150,7 @@ const FormObject: IFormObject[] = [
 const MenuFormObject: IFormObject[] = [
   {
     name: "name",
-    label: "Dish name",
+    label: "Dish name *",
     type: "text",
     size: "small",
     className: "",
@@ -168,7 +168,7 @@ const MenuFormObject: IFormObject[] = [
   },
   {
     name: "price",
-    label: "Price",
+    label: "Price *",
     type: "text",
     size: "small",
     className: "",
