@@ -1,0 +1,23 @@
+{
+  "name": "foodiedelight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd client && npm run start\" \"cd server && nodemon\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajuldixit/FoodieDelight.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajuldixit/FoodieDelight/issues"
+  },
+  "homepage": "https://github.com/rajuldixit/FoodieDelight#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
