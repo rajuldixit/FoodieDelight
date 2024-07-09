@@ -1,7 +1,7 @@
 ## Foodie Delight
 
 ### Steps to run
-#### 1. Git clone 
+#### 1. git clone https://github.com/rajuldixit/FoodieDelight.git 
 #### 2. npm install
 #### 3. npm run start 
 
