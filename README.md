@@ -2,10 +2,17 @@
 
 ### Steps to run
 #### 1. git clone https://github.com/rajuldixit/FoodieDelight.git 
-#### 2. npm install
-#### 3. npm run start 
+#### 2. cd FoodieDelight
+#### 3. npm install 
+#### 4. cd client
+#### 5. npm install
+#### 6. cd..
+#### 7. cd server
+#### 8. npm install
+#### 9. cd..
+#### 10. npm start
 
-##### Note : I am using  concurrently to run client and server with 1 single command.
+##### Note : I am using  concurrently to run client and server with 1 single command. Here we need to install client and server dependencies separatly once before running this app.
 
 ### Folder Structure
 
