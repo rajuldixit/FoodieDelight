@@ -6,6 +6,7 @@ import {
   Button
 } from "@nextui-org/react";
 import FoodImage from "../../../../assets/images/food3.jpg";
+import FoodImage2 from "../../../../assets/images/food6.jpg";
 import {
   DELETE,
   EDIT,
@@ -16,11 +17,13 @@ import { RestoCardProps } from "../../types";
 
 const RestoCard = ({
   resto,
+  index,
   onClick,
   onEdit,
   onDelete
 }: {
   resto: RestoCardProps;
+  index: number;
   onClick: () => void;
   onEdit: () => void;
   onDelete: () => void;
@@ -38,7 +41,7 @@ const RestoCard = ({
         )}
       </CardHeader>
       <CardBody>
-        <img src={FoodImage} />
+        {index % 2 === 0 ? <img src={FoodImage} /> : <img src={FoodImage2} />}
         <p>{resto.basicDetails.description}</p>
       </CardBody>
       <CardFooter className="flex justify-between cursor-pointer">

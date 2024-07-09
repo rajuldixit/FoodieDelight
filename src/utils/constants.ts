@@ -10,6 +10,11 @@ const EDIT = "Edit";
 const READ_MORE = "read more";
 const SAVE = "Save";
 const GENERIC_ERROR_MESSAGE = "Something went wrong !!";
+const ADD_RESTO_ACK_MESSAGE = "Restaurant Successfully Added !!";
+const ADD_NEW_RESTO = "Add New Restaurant";
+const EDIT_RESTO = "Edit the Restaurant";
+const ADD_MORE_RESTO = "Add more";
+const VIEW_RESTO = "Edit the Restaurant";
 
 const ERROR_MESSAGES = {
   RESTO_NAME_REQUIRED: "Resto name is required",
@@ -52,6 +57,11 @@ export {
   SAVE,
   ERROR_MESSAGES,
   GENERIC_ERROR_MESSAGE,
+  ADD_RESTO_ACK_MESSAGE,
+  ADD_MORE_RESTO,
+  EDIT_RESTO,
+  ADD_NEW_RESTO,
+  VIEW_RESTO,
   FoodCategory,
   FormFieldTypes
 };

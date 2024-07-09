@@ -15,6 +15,9 @@ import "./index.css";
 import useRestoData from "../../../hooks/useRestoData";
 import { RestoCardProps } from "../types";
 import { useDeleteRestoMutation } from "../../../services/RestoApi";
+import Skeleton_Card from "../../../shared_components/Skeleton_Card";
+import GlobalError from "../../../shared_components/GlobalError";
+import { ScrollShadow } from "@nextui-org/react";
 
 const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   const { restoList, isFetching, isError } = useRestoData();
@@ -50,28 +53,51 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
     setRestaurantData(restoList);
   }, [restoList]);
 
+  const onCloseToast = () => {};
   if (isFetching) {
-    return <div>loading...</div>;
+    return (
+      <div className="grid grid-cols-4 gap-2">
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+      </div>
+    );
   }
   if (isError) {
-    return <div>Error...</div>;
+    return (
+      <div>
+        <GlobalError />
+      </div>
+    );
   }
   return (
     <>
       {!isReadMoreActive ? (
-        <div className="grid resto-grid gap-4">
-          {restoList.map((resto) => (
-            <div className="col-span-1" key={resto.restoId}>
-              <RestoCard
-                resto={resto}
-                key={resto.restoId}
-                onClick={() => handleReadMore(resto.restoId)}
-                onEdit={() => onEdit(resto.restoId)}
-                onDelete={() => handleDeleteResto(resto.restoId)}
-              />
-            </div>
-          ))}
-        </div>
+        <ScrollShadow size={100} style={{ height: "600px" }}>
+          <div className="grid resto-grid gap-4">
+            {restoList.map((resto, index) => (
+              <div className="col-span-1" key={resto.restoId}>
+                <RestoCard
+                  resto={resto}
+                  index={index}
+                  key={resto.restoId}
+                  onClick={() => handleReadMore(resto.restoId)}
+                  onEdit={() => onEdit(resto.restoId)}
+                  onDelete={() => handleDeleteResto(resto.restoId)}
+                />
+              </div>
+            ))}
+          </div>
+        </ScrollShadow>
       ) : (
         <div>
           <RestoDetails

@@ -1,12 +1,14 @@
-import { Button, Card, CardHeader } from "@nextui-org/react";
+//external
+import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+//internal
 import AddEdit from "../../components/Restaurant/AddEdit";
 import Search from "../../components/Restaurant/Search";
 import FoodImage from "../../assets/images/food4.png";
 import ViewAll from "../../components/Restaurant/ViewAll";
-import { useGetAllRestoQuery } from "../../services/RestoApi";
-import data from "./../../../../server/node_modules/type-fest/source/readonly-deep.d";
 import useRestoData from "../../hooks/useRestoData";
+import GlobalError from "../../shared_components/GlobalError";
+import Skeleton_Card from "../../shared_components/Skeleton_Card";
 
 enum RestoAction {
   "ADD",
@@ -49,10 +51,29 @@ const Restaurants = () => {
   }, [restoList]);
 
   if (isError) {
-    return <div>Error...</div>;
+    return (
+      <div>
+        <GlobalError />
+      </div>
+    );
   }
   if (isFetching) {
-    return <div>loading...</div>;
+    return (
+      <div className="grid grid-cols-4 gap-2">
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+        <div className="col-span-1">
+          <Skeleton_Card />
+        </div>
+      </div>
+    );
   }
 
   return (

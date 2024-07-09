@@ -6,6 +6,15 @@ import RestaurantBasicForm from "./RestaurantBasicForm";
 import { MenuForm, RestoForm } from "./types";
 import RestaurantMenuForm from "./RestaurantMenuForm";
 import { useAddRestoMutation } from "../../../services/RestoApi";
+import Acknowledgement from "./Acknowledgement";
+import {
+  ADD_MORE_RESTO,
+  ADD_NEW_RESTO,
+  ADD_RESTO_ACK_MESSAGE,
+  EDIT_RESTO,
+  VIEW_RESTO
+} from "../../../utils/constants";
+import FD_Loader from "../../../shared_components/FD_Loader";
 
 const AddEdit = ({
   mode,
@@ -18,7 +27,7 @@ const AddEdit = ({
   const [menuFormData, setMenuFormData] = useState<MenuForm>();
   const [isNext, setIsNext] = useState(false);
   const [addResto, { isLoading: isUpdating }] = useAddRestoMutation();
-
+  const [showAcknowledgement, setShowAcknowledgement] = useState(false);
   const AddResto = (data: MenuForm) => {
     setMenuFormData(data);
   };
@@ -30,9 +39,18 @@ const AddEdit = ({
   const saveNew = async (obj) => {
     try {
       await addResto({ resto: obj }).unwrap();
+
+      setIsNext(null);
+      setShowAcknowledgement(true);
     } catch {}
   };
 
+  const handleAckPrimaryBtn = () => {
+    setShowAcknowledgement(false);
+    setIsNext(false);
+  };
+
+  useEffect(() => {}, [showAcknowledgement]);
   useEffect(() => {
     if (basicFormData && menuFormData) {
       const obj = {
@@ -59,27 +77,37 @@ const AddEdit = ({
   }, [menuFormData]);
 
   if (isUpdating) {
-    return <div>Updating..</div>;
+    return (
+      <div>
+        <FD_Loader />
+      </div>
+    );
   }
 
   return (
     <Card>
       <CardHeader>
-        {mode === "0" ? (
-          <h6>Add New Restaurant</h6>
-        ) : (
-          <h6>Edit the Restaurant</h6>
-        )}
-        {/* <Button onClick={saveNew}>saveNew</Button> */}
+        {!showAcknowledgement &&
+          (mode === "0" ? <h6>{ADD_NEW_RESTO}</h6> : <h6>{EDIT_RESTO}</h6>)}
       </CardHeader>
       <CardBody>
-        {!isNext ? (
-          <RestaurantBasicForm
-            onCancel={onCancel}
-            setBasicFormData={setBasicFormData}
+        {!showAcknowledgement &&
+          (!isNext ? (
+            <RestaurantBasicForm
+              onCancel={onCancel}
+              setBasicFormData={setBasicFormData}
+            />
+          ) : (
+            <RestaurantMenuForm setMenuFormData={AddResto} />
+          ))}
+        {showAcknowledgement && (
+          <Acknowledgement
+            message={ADD_RESTO_ACK_MESSAGE}
+            handlePrimaryBtn={handleAckPrimaryBtn}
+            handleSecondaryBtn={onCancel}
+            primaryBtnText={ADD_MORE_RESTO}
+            secondaryBtnText={VIEW_RESTO}
           />
-        ) : (
-          <RestaurantMenuForm setMenuFormData={AddResto} />
         )}
       </CardBody>
     </Card>
