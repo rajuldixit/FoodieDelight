@@ -1,8 +1,19 @@
 ## Foodie Delight
 
+### Steps to run
+#### 1. Git clone 
+#### 2. npm install
+#### 3. npm run start 
+
+##### Note : I am using  concurrently to run client and server with 1 single command.
+
 ### Folder Structure
 
 #### Client (React js)
+##### 1. React js
+##### 2. RTK Query
+##### 3. Nextui, tailwind, Material UI
+
 #### Server (Node js/ Express js)
 
 #### Screenshots
