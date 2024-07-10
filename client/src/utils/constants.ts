@@ -25,7 +25,8 @@ const ERROR_MESSAGES = {
   RESTO_OWNER_EMAIL_REQUIRED: "Owner email id is required",
   RESTO_CATEGORY_REQUIRED: "Category is required",
   MENU_DISH_NAME_REQUIRED: "Name is required",
-  MENU_DISH_PRICE_REQUIRED: "Price is required"
+  MENU_DISH_PRICE_REQUIRED: "Price is required",
+  INVALID_EMAIL: "Please enter a valid email id."
 };
 
 enum FoodCategory {
