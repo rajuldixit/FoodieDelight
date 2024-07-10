@@ -30,11 +30,28 @@ const addResto = async (req: IReq<{ resto: IResto }>, res: IRes) => {
  * Delete one user.
  */
 async function delete_(req: IReq, res: IRes) {
-  console.log("in delete route");
   const restoId = req.params.id;
   await RestoService.deleteResto(restoId);
   return res.status(HttpStatusCodes.OK).end();
 }
 
+/**
+ *  Filter Resto
+ */
+const filter_ = async (
+  req: IReq<{ key: string; value: string }>,
+  res: IRes
+) => {
+  const restoFilterParams = req.body;
+  console.log("req body :", req.body, restoFilterParams);
+  const restoData = await RestoService.filterResto(restoFilterParams);
+  return res.status(HttpStatusCodes.OK).json({ restoData });
+};
+
 // **** export default **** //
-export default { getAllResto, addResto, deleteResto: delete_ } as const;
+export default {
+  getAllResto,
+  addResto,
+  deleteResto: delete_,
+  filterResto: filter_
+} as const;

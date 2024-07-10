@@ -29,6 +29,9 @@ restoRouter.delete(
   RestoRoutes.deleteResto
 );
 
+// Delete one user
+restoRouter.post(Paths.Restaurants.Search, RestoRoutes.filterResto);
+
 // Add RestoRouter
 apiRouter.use(Paths.Restaurants.Base, restoRouter);
 

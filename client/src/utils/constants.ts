@@ -44,6 +44,40 @@ enum FormFieldTypes {
   "TEXTAREA"
 }
 
+const Search_keys = [
+  {
+    key: "RESTO_RATING",
+    label: "Restaurant rating"
+  },
+  {
+    key: "RESTO_NAME",
+    label: "Restaurant name"
+  },
+  {
+    key: "RESTO_CATEGORY",
+    label: "Category"
+  },
+  {
+    key: "DISH_NAME",
+    label: "Dish name"
+  },
+  {
+    key: "DISH_RATING",
+    label: "Dish rating"
+  }
+];
+
+const SORT_KEYS = [
+  {
+    key: "DISH_RATING",
+    values: ["5", "4", "3", "2", "1"]
+  },
+  {
+    key: "RESTO_RATING",
+    values: ["5", "4", "3", "2", "1"]
+  }
+];
+
 export {
   FOOTER_TEXT,
   APP_NAME,
@@ -63,6 +97,8 @@ export {
   EDIT_RESTO,
   ADD_NEW_RESTO,
   VIEW_RESTO,
+  Search_keys,
+  SORT_KEYS,
   FoodCategory,
   FormFieldTypes
 };

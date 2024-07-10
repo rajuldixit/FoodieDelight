@@ -32,6 +32,25 @@ async function _delete(id: string): Promise<void> {
   return RestoRepo.deleteResto(id);
 }
 
+/**
+ *  Filter resto data
+ */
+const _filter = async (params: {
+  key: string;
+  value: string;
+}): Promise<IResto[]> => {
+  console.log("Params :", params);
+  if (!!!params) {
+    throw new RouteError(HttpStatusCodes.NOT_FOUND, RESTO_NOT_FOUND_ERR);
+  }
+  return RestoRepo.filterResto(params);
+};
+
 // Export Default
 
-export default { getAll, addResto, deleteResto: _delete } as const;
+export default {
+  getAll,
+  addResto,
+  deleteResto: _delete,
+  filterResto: _filter
+} as const;
