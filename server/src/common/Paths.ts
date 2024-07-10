@@ -9,6 +9,7 @@ export default {
     Base: "/resto",
     Get: "/getAll",
     Add: "/addResto",
-    Delete: "/deleteResto/:id"
+    Delete: "/deleteResto/:id",
+    Search: "/search"
   }
 } as const;

@@ -9,6 +9,8 @@ import ViewAll from "../../components/Restaurant/ViewAll";
 import useRestoData from "../../hooks/useRestoData";
 import GlobalError from "../../shared_components/GlobalError";
 import Skeleton_Card from "../../shared_components/Skeleton_Card";
+import { useSearchMutation } from "../../services/RestoApi";
+import { Search_keys } from "../../utils/constants";
 
 enum RestoAction {
   "ADD",
@@ -27,6 +29,7 @@ const Restaurants = () => {
 
   const { restoList, isError, isFetching } = useRestoData();
   const [restaurantsList, setRestaurantsList] = useState([]);
+  const [search, data] = useSearchMutation();
 
   const toggleActiveAction = () => {
     activeAction === RestoAction.VIEW
@@ -44,6 +47,18 @@ const Restaurants = () => {
   const handleEditResto = (id: string) => {
     setMode(RestoAction.EDIT.toString());
     toggleActiveAction();
+  };
+
+  const searchMethod = async () => {
+    try {
+      const resp = await search({
+        key: Search_keys[1].key,
+        value: "Rasoi"
+      }).unwrap();
+      console.log("Resp :", resp);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -78,6 +93,7 @@ const Restaurants = () => {
 
   return (
     <>
+      <Button onClick={searchMethod}>Search</Button>
       <div className="h-screen">
         {restaurantsList.length === 0 && (
           <div className="w-full p-x-4rem py-4">

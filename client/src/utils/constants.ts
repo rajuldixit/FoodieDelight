@@ -25,7 +25,8 @@ const ERROR_MESSAGES = {
   RESTO_OWNER_EMAIL_REQUIRED: "Owner email id is required",
   RESTO_CATEGORY_REQUIRED: "Category is required",
   MENU_DISH_NAME_REQUIRED: "Name is required",
-  MENU_DISH_PRICE_REQUIRED: "Price is required"
+  MENU_DISH_PRICE_REQUIRED: "Price is required",
+  INVALID_EMAIL: "Please enter a valid email id."
 };
 
 enum FoodCategory {
@@ -42,6 +43,40 @@ enum FormFieldTypes {
   "RADIO",
   "TEXTAREA"
 }
+
+const Search_keys = [
+  {
+    key: "RESTO_RATING",
+    label: "Restaurant rating"
+  },
+  {
+    key: "RESTO_NAME",
+    label: "Restaurant name"
+  },
+  {
+    key: "RESTO_CATEGORY",
+    label: "Category"
+  },
+  {
+    key: "DISH_NAME",
+    label: "Dish name"
+  },
+  {
+    key: "DISH_RATING",
+    label: "Dish rating"
+  }
+];
+
+const SORT_KEYS = [
+  {
+    key: "DISH_RATING",
+    values: ["5", "4", "3", "2", "1"]
+  },
+  {
+    key: "RESTO_RATING",
+    values: ["5", "4", "3", "2", "1"]
+  }
+];
 
 export {
   FOOTER_TEXT,
@@ -62,6 +97,8 @@ export {
   EDIT_RESTO,
   ADD_NEW_RESTO,
   VIEW_RESTO,
+  Search_keys,
+  SORT_KEYS,
   FoodCategory,
   FormFieldTypes
 };

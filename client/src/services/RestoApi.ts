@@ -30,6 +30,9 @@ export const restoApi = createApi({
         method: "DELETE"
       }),
       invalidatesTags: ["resto"]
+    }),
+    search: builder.mutation<any, any>({
+      query: (body) => createRequest("/resto/search", "POST", body)
     })
   })
 });
@@ -38,5 +41,6 @@ export const {
   useGetAllRestoQuery,
   useLazyGetRestoByIdQuery,
   useAddRestoMutation,
-  useDeleteRestoMutation
+  useDeleteRestoMutation,
+  useSearchMutation
 } = restoApi;
