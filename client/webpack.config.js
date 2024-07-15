@@ -42,7 +42,18 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".*", ".js", ".jsx", ".ts", ".tsx"]
+    alias: {
+      pages: path.resolve(__dirname, "src/pages/"),
+      shared_components: path.resolve(__dirname, "src/shared_components/"),
+      hooks: path.resolve(__dirname, "src/hooks/"),
+      components: path.resolve(__dirname, "src/components/"),
+      services: path.resolve(__dirname, "src/services/"),
+      state: path.resolve(__dirname, "src/state/"),
+      utils: path.resolve(__dirname, "src/utils/"),
+      assets: path.resolve(__dirname, "src/assets/")
+    },
+    extensions: [".*", ".js", ".jsx", ".ts", ".tsx"],
+    preferRelative: true
   },
   devServer: {
     historyApiFallback: true,

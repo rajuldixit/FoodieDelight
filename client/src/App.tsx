@@ -1,5 +1,5 @@
-import Layout from "./pages/Layout";
-import ThemeProvider from "./shared_components/Theme/ThemeProvider";
+import Layout from "pages/Layout";
+import ThemeProvider from "shared_components/Theme/ThemeProvider";
 
 const App = () => {
   return (

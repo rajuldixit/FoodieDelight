@@ -6,9 +6,9 @@ import { Provider } from "react-redux";
 import "./index.css";
 import "./output.css";
 import App from "./App";
-import Dashboard from "./pages/Dashboard";
-import Restaurants from "./pages/Restaurants";
-import store from "./state/store";
+import Dashboard from "pages/Dashboard";
+import Restaurants from "pages/Restaurants";
+import store from "state/store";
 
 const router = createBrowserRouter([
   {
