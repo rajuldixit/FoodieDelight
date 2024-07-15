@@ -76,15 +76,19 @@ app.set("views", viewsDir);
 const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
 
-app.get("api/resto/getAll", (_: Request, res: Response) => {
+app.use("api/resto/getAll", (_: Request, res: Response) => {
   return RestoRoutes.getAllResto(_, res);
 });
-app.get("api/resto/addResto", (req: Request, res: Response) => {
+app.use("api/resto/addResto", (req: Request, res: Response) => {
   return RestoRoutes.addResto(req, res);
 });
 
-app.get("api/resto/deleteResto/:id", (req: Request, res: Response) => {
+app.use("api/resto/deleteResto/:id", (req: Request, res: Response) => {
   return RestoRoutes.deleteResto(req, res);
+});
+///resto/search
+app.use("api/resto/search", (req: Request, res: Response) => {
+  return RestoRoutes.filterResto(req, res);
 });
 
 // **** Export default **** //

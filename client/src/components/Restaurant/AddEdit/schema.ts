@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "../../../utils/constants";
+import { emailValidation } from "../../../utils/validationMatch";
 
 export const RestoBasicFormSchema = yup.object().shape({
   restoId: yup.string().required(),
@@ -16,7 +17,10 @@ export const RestoBasicFormSchema = yup.object().shape({
     .required(ERROR_MESSAGES.RESTO_REGISTRATION_NO_REQUIRED),
   owner: yup.object().shape({
     name: yup.string().required(ERROR_MESSAGES.RESTO_OWNER_NAME_REQUIRED),
-    email: yup.string().required(ERROR_MESSAGES.RESTO_OWNER_EMAIL_REQUIRED)
+    email: yup
+      .string()
+      .required(ERROR_MESSAGES.RESTO_OWNER_EMAIL_REQUIRED)
+      .matches(emailValidation, ERROR_MESSAGES.INVALID_EMAIL)
   })
 });
 

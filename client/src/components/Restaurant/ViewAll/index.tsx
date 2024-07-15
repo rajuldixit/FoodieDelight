@@ -82,7 +82,11 @@ const ViewAll = ({ onEdit }: { onEdit: (id) => void }) => {
   return (
     <>
       {!isReadMoreActive ? (
-        <ScrollShadow size={100} style={{ height: "600px" }}>
+        <ScrollShadow
+          size={100}
+          style={{ height: "600px", padding: "1% 0" }}
+          hideScrollBar
+        >
           <div className="grid resto-grid gap-4">
             {restoList.map((resto, index) => (
               <div className="col-span-1" key={resto.restoId}>

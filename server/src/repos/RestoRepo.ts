@@ -1,7 +1,7 @@
-// ** Function ** //
-
 import { IResto } from "@src/models/Resto";
 import MockOrm from "./MockOrm";
+
+// ** Function ** //
 
 // Add New Restaurant
 const addResto = async (resto: IResto): Promise<void> => {
@@ -42,6 +42,21 @@ async function delete_(id: string): Promise<void> {
     }
   }
 }
+/**
+ *  Search/Filter Resto
+ */
+async function filter_(params: {
+  key: string;
+  value: string;
+}): Promise<IResto[]> {
+  const db = await MockOrm.openRestoDB();
+  const filteredRestoData = db.resto.filter((resto) => {
+    if (resto.basicDetails.name.includes(params.value)) {
+      return resto;
+    }
+  });
+  return filteredRestoData;
+}
 
 // **** Export default **** //
 
@@ -49,5 +64,6 @@ export default {
   addResto,
   getAllResto,
   persists,
-  deleteResto: delete_
+  deleteResto: delete_,
+  filterResto: filter_
 } as const;
