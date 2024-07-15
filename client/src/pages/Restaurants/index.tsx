@@ -93,7 +93,6 @@ const Restaurants = () => {
 
   return (
     <>
-      <Button onClick={searchMethod}>Search</Button>
       <div className="h-screen">
         {restaurantsList.length === 0 && (
           <div className="w-full p-x-4rem py-4">
