@@ -64,6 +64,10 @@ const Search_keys = [
   {
     key: "DISH_RATING",
     label: "Dish rating"
+  },
+  {
+    key: "NONE",
+    label: "Reset"
   }
 ];
 
