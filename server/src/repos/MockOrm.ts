@@ -1,5 +1,6 @@
 import jsonfile from "jsonfile";
 import { IResto } from "@src/models/Resto";
+import { IUser } from "@src/models/User";
 
 // **** Variables **** //
 
@@ -10,6 +11,11 @@ const DB_FILE_NAME = "database.json";
 interface IRestoDB {
   resto: IResto[];
 }
+
+interface IUserDB {
+  user: IUser[];
+}
+
 // **** Functions **** //
 
 /**
@@ -23,9 +29,15 @@ const saveRestoDB = (db: IRestoDB): Promise<void> => {
   return jsonfile.writeFile(__dirname + "/" + DB_FILE_NAME, db);
 };
 
+//** fetch the user */
+const openUserDB = (): Promise<IUserDB> => {
+  return jsonfile.readFile(__dirname + "/" + DB_FILE_NAME) as Promise<IUserDB>;
+};
+
 // **** Export default **** //
 
 export default {
   openRestoDB,
-  saveRestoDB
+  saveRestoDB,
+  openUserDB
 } as const;

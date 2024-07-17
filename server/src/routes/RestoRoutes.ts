@@ -43,7 +43,6 @@ const filter_ = async (
   res: IRes
 ) => {
   const restoFilterParams = req.body;
-  console.log("req body :", req.body, restoFilterParams);
   const restoData = await RestoService.filterResto(restoFilterParams);
   return res.status(HttpStatusCodes.OK).json({ restoData });
 };

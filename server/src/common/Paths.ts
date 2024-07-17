@@ -11,5 +11,9 @@ export default {
     Add: "/addResto",
     Delete: "/deleteResto/:id",
     Search: "/search"
+  },
+  Login: {
+    Base: "/user",
+    Signin: "/signin"
   }
 } as const;
