@@ -19,6 +19,7 @@ import HttpStatusCodes from "@src/common/HttpStatusCodes";
 import RouteError from "@src/common/RouteError";
 import { NodeEnvs } from "@src/common/misc";
 import RestoRoutes from "./routes/RestoRoutes";
+import LoginRoutes from "./routes/LoginRoutes";
 
 const cors = require("cors");
 // **** Variables **** //
@@ -89,6 +90,11 @@ app.use("api/resto/deleteResto/:id", (req: Request, res: Response) => {
 ///resto/search
 app.use("api/resto/search", (req: Request, res: Response) => {
   return RestoRoutes.filterResto(req, res);
+});
+
+app.use("api/user/signin", (req: Request, res: Response) => {
+  console.log("in api signin");
+  return LoginRoutes.signin(req, res);
 });
 
 // **** Export default **** //

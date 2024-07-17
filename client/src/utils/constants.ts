@@ -1,6 +1,9 @@
 const FOOTER_TEXT = "Copyright 2024";
 const APP_NAME = "Foodie Delight";
-const NAV_MENU = "Restaurants";
+const NAV_MENU = [
+  { label: "Restaurants", link: "/restaurants" },
+  { label: "Report", link: "/report" }
+];
 const SIGNED_IN_TEXT = "Signed in as";
 const LOGOUT = "Logout";
 const DELETE_RESTO_TEXT = "Are you sure, You want to delete this restaurant ?";
@@ -42,6 +45,10 @@ enum FormFieldTypes {
   "CHECKBOX",
   "RADIO",
   "TEXTAREA"
+}
+enum Roles {
+  "ADMIN",
+  "USER"
 }
 
 const Search_keys = [
@@ -103,6 +110,7 @@ export {
   VIEW_RESTO,
   Search_keys,
   SORT_KEYS,
+  Roles,
   FoodCategory,
   FormFieldTypes
 };

@@ -39,7 +39,6 @@ const _filter = async (params: {
   key: string;
   value: string;
 }): Promise<IResto[]> => {
-  console.log("Params :", params);
   if (!!!params) {
     throw new RouteError(HttpStatusCodes.NOT_FOUND, RESTO_NOT_FOUND_ERR);
   }
