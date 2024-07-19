@@ -11,6 +11,8 @@ import Dashboard from "pages/Dashboard";
 import Restaurants from "pages/Restaurants";
 import store from "state/store";
 import SignIn from "pages/SignIn";
+import { AuthProvider } from "context/AuthContext";
+import ProtectedRoute from "pages/ProtectedRoute";
 const Report = lazy(() => import("pages/Report"));
 
 const router = createBrowserRouter([
@@ -20,7 +22,14 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/restaurants", element: <Restaurants /> },
-      { path: "/report", element: <Report /> }
+      {
+        path: "/report",
+        element: (
+          <ProtectedRoute>
+            <Report />
+          </ProtectedRoute>
+        )
+      }
     ]
   },
   {
@@ -34,7 +43,9 @@ const root = ReactDOM.createRoot(
 if (root) {
   root.render(
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </Provider>
   );
 }

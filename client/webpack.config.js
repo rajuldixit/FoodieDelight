@@ -50,7 +50,8 @@ module.exports = {
       services: path.resolve(__dirname, "src/services/"),
       state: path.resolve(__dirname, "src/state/"),
       utils: path.resolve(__dirname, "src/utils/"),
-      assets: path.resolve(__dirname, "src/assets/")
+      assets: path.resolve(__dirname, "src/assets/"),
+      context: path.resolve(__dirname, "src/context/")
     },
     extensions: [".*", ".js", ".jsx", ".ts", ".tsx"],
     preferRelative: true

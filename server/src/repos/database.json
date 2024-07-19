@@ -4,9 +4,16 @@
       "username": "ADMIN",
       "password": "ADMIN",
       "role": "ADMIN",
-      "name": "Admin"
+      "name": "Admin",
+      "email": "admin@foodieDelight.com"
     },
-    { "username": "USER", "password": "USER", "role": "USER", "name": "User" }
+    {
+      "username": "USER",
+      "password": "USER",
+      "role": "USER",
+      "name": "User",
+      "email": "user@foodieDelight.com"
+    }
   ],
   "resto": [
     {

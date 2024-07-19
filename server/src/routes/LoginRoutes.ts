@@ -13,11 +13,9 @@ const signin = async (
   res: IRes
 ) => {
   const signinParams = req.body;
-  console.log("signin ---", signinParams);
   const user = await LoginService.signin(signinParams);
-  console.log("user :::", user);
   !!user
-    ? res.status(HttpStatusCodes.OK).json({ user })
+    ? res.status(HttpStatusCodes.OK).json({ data: user })
     : res.status(HttpStatusCodes.NOT_FOUND).json({ message: USER_NOT_FOUND });
 };
 

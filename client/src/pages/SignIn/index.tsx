@@ -1,13 +1,28 @@
 import { CardContent } from "@mui/material";
 import { Button, Card, CardFooter, CardHeader, Input } from "@nextui-org/react";
 import { useSigninMutation } from "services/LoginApi";
+import { useAuth } from "context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [login] = useSigninMutation();
-
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
   const signIn = async () => {
-    const resp = await login({ username: "ADMIN", password: "ADMIN" }).unwrap();
+    const resp = await login({ username: "USER", password: "USER" }).unwrap();
     console.log("signin : ", resp);
+    const obj = {
+      accessToken: resp.data.accessToken,
+      refreshToken: resp.data.refreshToken,
+      name: resp.data.user.name,
+      email: resp.data.user.email,
+      password: resp.data.user.password,
+      username: resp.data.user.username,
+      role: resp.data.user.role
+    };
+    localStorage.setItem("user", JSON.stringify(obj));
+    setUser(obj);
+    navigate("/");
   };
   return (
     <div className="flex justify-center items-center w-full h-screen">
