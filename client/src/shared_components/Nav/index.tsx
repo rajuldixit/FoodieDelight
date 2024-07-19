@@ -21,6 +21,9 @@ const Nav = () => {
   const navigate = useNavigate();
   const loggedInUserId = "admin@foodiedelight.com";
   const { user } = useAuth();
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
   useEffect(() => {
     console.log("user in nav :", user);
   }, [user]);
@@ -75,7 +78,7 @@ const Nav = () => {
                 <DropdownItem key="theme">
                   <ThemePicker />
                 </DropdownItem>
-                <DropdownItem key="logout" color="danger">
+                <DropdownItem key="logout" color="danger" onClick={logout}>
                   {LOGOUT}
                 </DropdownItem>
               </DropdownMenu>

@@ -13,7 +13,8 @@ import store from "state/store";
 import SignIn from "pages/SignIn";
 import { AuthProvider } from "context/AuthContext";
 import ProtectedRoute from "pages/ProtectedRoute";
-const Report = lazy(() => import("pages/Report"));
+// const Report = lazy(() => import("pages/Report"));
+import Report from "pages/Report";
 
 const router = createBrowserRouter([
   {
