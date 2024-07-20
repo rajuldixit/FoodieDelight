@@ -1,9 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "./BaseApi";
 
-const baseUrl = "http://localhost:3000/api";
-export const loginApi = createApi({
-  reducerPath: "loginApi",
-  baseQuery: fetchBaseQuery({ baseUrl }),
+export const loginApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     signin: builder.mutation<any, any>({
       query: (body) => ({ url: "/user/signin", method: "POST", body })

@@ -1,6 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const baseUrl = "http://localhost:3000/api";
+import { baseApi } from "./BaseApi";
 
 const createRequest = (url: string, method = "GET", body = {}) => ({
   url,
@@ -8,10 +6,7 @@ const createRequest = (url: string, method = "GET", body = {}) => ({
   body
 });
 
-export const restoApi = createApi({
-  reducerPath: "restoApi",
-  tagTypes: ["resto"],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+export const restoApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllResto: builder.query<any, number>({
       query: () => "/resto/getAll",

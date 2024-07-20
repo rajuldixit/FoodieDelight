@@ -1,14 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { restoApi } from "services/RestoApi";
-import { loginApi } from "services/LoginApi";
+import { baseApi } from "services/BaseApi";
 
 export default configureStore({
   reducer: {
-    [restoApi.reducerPath]: restoApi.reducer,
-    [loginApi.reducerPath]: loginApi.reducer
+    [baseApi.reducerPath]: baseApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(restoApi.middleware)
-      .concat(loginApi.middleware)
+    getDefaultMiddleware().concat(baseApi.middleware)
 });
