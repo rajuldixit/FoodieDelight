@@ -14,6 +14,7 @@ export default {
   },
   Login: {
     Base: "/user",
-    Signin: "/signin"
+    Signin: "/signin",
+    Signout: "/signout"
   }
 } as const;

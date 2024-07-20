@@ -85,7 +85,7 @@ const Report = () => {
             </Card>
             <Card style={{ width: "50%" }}>
               <CardHeader>Ratings</CardHeader>
-              <CardBody>
+              <CardBody className="flex justify-center items-center">
                 <PieChart
                   colors={palette}
                   series={[

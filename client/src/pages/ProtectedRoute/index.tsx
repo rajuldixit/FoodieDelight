@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 type ProtectedRouteProps = PropsWithChildren;
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     const getUser = async () => {
-      await user;
       if (user && user.role !== "ADMIN") {
         navigate("/signin", { replace: true });
       }

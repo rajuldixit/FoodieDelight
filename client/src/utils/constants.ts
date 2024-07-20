@@ -1,8 +1,12 @@
 const FOOTER_TEXT = "Copyright 2024";
 const APP_NAME = "Foodie Delight";
-const NAV_MENU = [
+const NAV_MENU_LOGGED_IN = [
   { label: "Restaurants", link: "/restaurants" },
   { label: "Report", link: "/report" }
+];
+const NAV_MENU_LOGGED_OUT = [
+  { label: "Restaurants", link: "/restaurants" },
+  { label: "Sign in", link: "/signin" }
 ];
 const SIGNED_IN_TEXT = "Signed in as";
 const LOGOUT = "Logout";
@@ -91,6 +95,7 @@ const SORT_KEYS = [
 
 const SUB_URLS = {
   SIGN_IN: "/user/signin",
+  SIGN_OUT: "/user/signout",
   GET_ALL_RESTO: "/resto/getAll",
   GET_RESTO_BY_ID: "/resto/getById=",
   ADD_NEW_RESTO: "/resto/addResto",
@@ -101,7 +106,8 @@ const SUB_URLS = {
 export {
   FOOTER_TEXT,
   APP_NAME,
-  NAV_MENU,
+  NAV_MENU_LOGGED_IN,
+  NAV_MENU_LOGGED_OUT,
   SIGNED_IN_TEXT,
   LOGOUT,
   DELETE_RESTO_TEXT,

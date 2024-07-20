@@ -92,6 +92,8 @@ app.use("api/resto/search", (req: Request, res: Response) => {
   return RestoRoutes.filterResto(req, res);
 });
 
+// user signin
+
 app.use("api/user/signin", (req: Request, res: Response) => {
   console.log("in api signin");
   return LoginRoutes.signin(req, res);

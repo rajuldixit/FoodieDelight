@@ -13,42 +13,38 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 // Internal
-import { APP_NAME, LOGOUT, NAV_MENU, SIGNED_IN_TEXT } from "utils/constants";
+import {
+  APP_NAME,
+  LOGOUT,
+  NAV_MENU_LOGGED_IN,
+  NAV_MENU_LOGGED_OUT,
+  SIGNED_IN_TEXT
+} from "utils/constants";
 import { useAuth } from "context/AuthContext";
 import ThemePicker from "shared_components/Theme/ThemePicker";
 
 const Nav = () => {
   const navigate = useNavigate();
-  const loggedInUserId = "admin@foodiedelight.com";
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const logout = () => {
     localStorage.removeItem("user");
+    setUser(null);
   };
-  useEffect(() => {
-    console.log("user in nav :", user);
-  }, [user]);
+
   return (
     <>
-      {!user ? (
-        <Navbar isBordered>
-          <NavbarContent justify="end">
-            <h3 className="cursor-pointer" onClick={() => navigate("/signin")}>
-              Sign in
-            </h3>
-          </NavbarContent>
-        </Navbar>
-      ) : (
-        <Navbar isBordered>
-          <NavbarContent justify="start">
-            <NavbarBrand
-              className="mr-4 cursor-pointer"
-              onClick={() => navigate("/")}
-            >
-              <h2 className="sm:block font-bold text-inherit">{APP_NAME}</h2>
-            </NavbarBrand>
-          </NavbarContent>
-          <NavbarContent as="div" className="items-center" justify="end">
-            {NAV_MENU.map((menu: { label: string; link: string }) => (
+      <Navbar isBordered>
+        <NavbarContent justify="start">
+          <NavbarBrand
+            className="mr-4 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <h2 className="sm:block font-bold text-inherit">{APP_NAME}</h2>
+          </NavbarBrand>
+        </NavbarContent>
+        <NavbarContent justify="end">
+          {!user ? (
+            NAV_MENU_LOGGED_OUT.map((menu: { label: string; link: string }) => (
               <h3
                 className="sm:block font-bold text-inherit mr-2 cursor-pointer"
                 onClick={() => navigate(menu.link)}
@@ -56,36 +52,49 @@ const Nav = () => {
               >
                 {menu.label}
               </h3>
-            ))}
-
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as="button"
-                  className="transition-transform"
-                  color="secondary"
-                  name="Admin"
-                  size="sm"
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                />
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">{SIGNED_IN_TEXT}</p>
-                  <p className="font-semibold">{user?.email}</p>
-                </DropdownItem>
-                <DropdownItem key="theme">
-                  <ThemePicker />
-                </DropdownItem>
-                <DropdownItem key="logout" color="danger" onClick={logout}>
-                  {LOGOUT}
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </NavbarContent>
-        </Navbar>
-      )}
+            ))
+          ) : (
+            <>
+              {NAV_MENU_LOGGED_IN.map(
+                (menu: { label: string; link: string }) => (
+                  <h3
+                    className="sm:block font-bold text-inherit mr-2 cursor-pointer"
+                    onClick={() => navigate(menu.link)}
+                    key={menu.label}
+                  >
+                    {menu.label}
+                  </h3>
+                )
+              )}
+              <Dropdown placement="bottom-end">
+                <DropdownTrigger>
+                  <Avatar
+                    isBordered
+                    as="button"
+                    className="transition-transform"
+                    color="secondary"
+                    name="Admin"
+                    size="sm"
+                    src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                  />
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Profile Actions" variant="flat">
+                  <DropdownItem key="profile" className="h-14 gap-2">
+                    <p className="font-semibold">{SIGNED_IN_TEXT}</p>
+                    <p className="font-semibold">{user?.email}</p>
+                  </DropdownItem>
+                  <DropdownItem key="theme">
+                    <ThemePicker />
+                  </DropdownItem>
+                  <DropdownItem key="logout" color="danger" onClick={logout}>
+                    {LOGOUT}
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </>
+          )}
+        </NavbarContent>
+      </Navbar>
     </>
   );
 };
