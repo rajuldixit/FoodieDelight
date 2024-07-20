@@ -89,6 +89,15 @@ const SORT_KEYS = [
   }
 ];
 
+const SUB_URLS = {
+  SIGN_IN: "/user/signin",
+  GET_ALL_RESTO: "/resto/getAll",
+  GET_RESTO_BY_ID: "/resto/getById=",
+  ADD_NEW_RESTO: "/resto/addResto",
+  DELETE_RESTO: "resto/deleteResto/",
+  SEARCH_RESTO: "/resto/search"
+};
+
 export {
   FOOTER_TEXT,
   APP_NAME,
@@ -110,6 +119,7 @@ export {
   VIEW_RESTO,
   Search_keys,
   SORT_KEYS,
+  SUB_URLS,
   Roles,
   FoodCategory,
   FormFieldTypes

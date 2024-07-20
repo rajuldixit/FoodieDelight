@@ -1,3 +1,4 @@
+import { SUB_URLS } from "utils/constants";
 import { baseApi } from "./BaseApi";
 
 const createRequest = (url: string, method = "GET", body = {}) => ({
@@ -9,25 +10,26 @@ const createRequest = (url: string, method = "GET", body = {}) => ({
 export const restoApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllResto: builder.query<any, number>({
-      query: () => "/resto/getAll",
+      query: () => SUB_URLS.GET_ALL_RESTO,
       providesTags: ["resto"]
     }),
     getRestoById: builder.query<any, string>({
-      query: (restoId: string) => createRequest(`/resto/getById=${restoId}`)
+      query: (restoId: string) =>
+        createRequest(`${SUB_URLS.GET_RESTO_BY_ID}${restoId}`)
     }),
     addResto: builder.mutation<any, any>({
-      query: (body) => createRequest("/resto/addResto", "POST", body),
+      query: (body) => createRequest(SUB_URLS.ADD_NEW_RESTO, "POST", body),
       invalidatesTags: ["resto"]
     }),
     deleteResto: builder.mutation<any, any>({
       query: (restoId) => ({
-        url: `resto/deleteResto/${restoId}`,
+        url: `${SUB_URLS.DELETE_RESTO}${restoId}`,
         method: "DELETE"
       }),
       invalidatesTags: ["resto"]
     }),
     search: builder.mutation<any, any>({
-      query: (body) => createRequest("/resto/search", "POST", body)
+      query: (body) => createRequest(SUB_URLS.SEARCH_RESTO, "POST", body)
     })
   })
 });
