@@ -7,11 +7,14 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   useEffect(() => {
-    console.log("herererrere");
-    if (!user || (user && user.role !== "ADMIN")) {
-      navigate("/signin", { replace: true });
-    }
-  }, [user, navigate]);
+    const getUser = async () => {
+      await user;
+      if (user && user.role !== "ADMIN") {
+        navigate("/signin", { replace: true });
+      }
+    };
+    getUser();
+  }, [user]);
   return children;
 };
 

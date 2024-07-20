@@ -16,8 +16,8 @@ const palette = ["red", "blue", "green"];
 const Report = () => {
   return (
     <div className="flex justify-center items-center">
-      <div>
-        <Card className="mt-2 mb-2">
+      <div className="p-4">
+        <Card className="mt-2 mb-2 p-4">
           <CardBody className="flex justify-between gap-2 flex-row">
             <Card>
               <CardHeader>Top 5 Dishes</CardHeader>
@@ -66,9 +66,9 @@ const Report = () => {
             </Card>
           </CardBody>
         </Card>
-        <Card className="mt-2 mb-2">
+        <Card className="mt-2 mb-2 p-4">
           <CardBody className="flex justify-between gap-2 flex-row">
-            <Card>
+            <Card style={{ width: "50%" }}>
               <CardHeader>Profile</CardHeader>
               <CardBody>
                 <LineChart
@@ -83,7 +83,7 @@ const Report = () => {
                 />
               </CardBody>
             </Card>
-            <Card>
+            <Card style={{ width: "50%" }}>
               <CardHeader>Ratings</CardHeader>
               <CardBody>
                 <PieChart
