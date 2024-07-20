@@ -15,7 +15,7 @@ const SignIn = () => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
   const signIn = async () => {
-    const resp = await login({ username: "ADMIN", password: "ADMIN" }).unwrap();
+    const resp = await login({ username: "USER", password: "USER" }).unwrap();
     const obj = {
       accessToken: resp.data.accessToken,
       refreshToken: resp.data.refreshToken,

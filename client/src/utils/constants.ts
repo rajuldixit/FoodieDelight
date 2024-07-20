@@ -51,8 +51,8 @@ enum FormFieldTypes {
   "TEXTAREA"
 }
 enum Roles {
-  "ADMIN",
-  "USER"
+  "ADMIN" = "ADMIN",
+  "USER" = "USER"
 }
 
 const Search_keys = [

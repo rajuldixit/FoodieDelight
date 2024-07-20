@@ -11,9 +11,12 @@ import {
   DELETE,
   EDIT,
   FoodCategory,
-  READ_MORE
+  READ_MORE,
+  Roles
 } from "../../../../utils/constants";
 import { RestoCardProps } from "../../types";
+import { useAuth } from "context/AuthContext";
+import { useEffect } from "react";
 
 const RestoCard = ({
   resto,
@@ -28,6 +31,8 @@ const RestoCard = ({
   onEdit: () => void;
   onDelete: () => void;
 }) => {
+  const { user } = useAuth();
+
   return (
     <Card>
       <CardHeader className="flex justify-between">
@@ -45,19 +50,26 @@ const RestoCard = ({
         <p>{resto.basicDetails.description}</p>
       </CardBody>
       <CardFooter className="flex justify-between cursor-pointer">
-        <div className="flex gap-2">
-          <Button variant="bordered" color="warning" size="sm" onClick={onEdit}>
-            {EDIT}
-          </Button>
-          <Button
-            variant="bordered"
-            color="danger"
-            size="sm"
-            onClick={onDelete}
-          >
-            {DELETE}
-          </Button>
-        </div>
+        {user && user.role === Roles.ADMIN && (
+          <div className="flex gap-2">
+            <Button
+              variant="bordered"
+              color="warning"
+              size="sm"
+              onClick={onEdit}
+            >
+              {EDIT}
+            </Button>
+            <Button
+              variant="bordered"
+              color="danger"
+              size="sm"
+              onClick={onDelete}
+            >
+              {DELETE}
+            </Button>
+          </div>
+        )}
         <p onClick={onClick}>{READ_MORE}</p>
       </CardFooter>
     </Card>
