@@ -59,11 +59,7 @@ const getRestoByTag = async (
           menu: 1
         }
       },
-      {
-        $match: {
-          "menu.tags": "Paneer"
-        }
-      },
+
       {
         $unwind: "$menu"
       },
@@ -95,7 +91,8 @@ const getRestoByTag = async (
               name: "$menu.name",
               rating: "$menu.rating",
               price: "$menu.price",
-              description: "$menu.description"
+              description: "$menu.description",
+              tag: "$menu.tags"
             }
           }
         }
