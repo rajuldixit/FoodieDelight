@@ -2,6 +2,7 @@ import { IRestaurant, IRestaurantsByTag, IResto } from "@src/models/Resto";
 import MockOrm from "./MockOrm";
 import RestoOwner from "@src/models/restoOwner.model";
 import Restaurant from "@src/models/restaurant.model";
+import Tag from "@src/models/tag.model";
 
 // ** Function ** //
 
@@ -46,6 +47,7 @@ const addResto = async (restaurant: IRestaurant): Promise<object | string> => {
 const getRestoByTag = async (
   tagId: string
 ): Promise<IRestaurantsByTag[] | string> => {
+  const tag = await Tag.findOne({ _id: tagId });
   try {
     const restaurants = await Restaurant.aggregate([
       {
@@ -68,7 +70,7 @@ const getRestoByTag = async (
       },
       {
         $match: {
-          "menu.tags": "Paneer"
+          "menu.tags": tag?.name
         }
       },
       {
