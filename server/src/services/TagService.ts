@@ -1,4 +1,4 @@
-import { ITag } from "@src/models/Tag";
+import { ITag, ITagWithId } from "@src/models/Tag";
 import TagRepo from "@src/repos/TagRepo";
 
 /**
@@ -9,4 +9,7 @@ const addTag = async (tag: ITag): Promise<object | string> => {
   return TagRepo.AddTag(tag);
 };
 
-export default { addTag } as const;
+const getAllTags = async (): Promise<ITagWithId[] | string> => {
+  return TagRepo.getAllTags();
+};
+export default { addTag, getAllTags } as const;

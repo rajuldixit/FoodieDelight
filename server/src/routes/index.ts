@@ -51,6 +51,8 @@ signinRouter.post(Paths.Login.Signin, LoginRoutes.signin);
 
 // Add Tag
 tagRouter.post(Paths.Tags.Add, TagRoutes.addTag);
+// get all tags
+tagRouter.get(Paths.Tags.Get, TagRoutes.getAllTags);
 
 // Add RestoRouter
 apiRouter.use(Paths.Restaurants.Base, restoRouter);

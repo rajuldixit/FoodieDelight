@@ -1,4 +1,4 @@
-import { ITag } from "@src/models/Tag";
+import { ITag, ITagWithId } from "@src/models/Tag";
 import Tag from "@src/models/tag.model";
 // Functions
 
@@ -19,4 +19,17 @@ const AddTag = async (tag: ITag): Promise<object | string> => {
   }
 };
 
-export default { AddTag } as const;
+/**
+ *  @desc get all tags
+ */
+
+const getAllTags = async (): Promise<ITagWithId[] | string> => {
+  try {
+    const tags = await Tag.aggregate([{ $project: { name: 1, _id: 1 } }]);
+    return tags;
+  } catch (error) {
+    return "Error while saving in db";
+  }
+};
+
+export default { AddTag, getAllTags } as const;

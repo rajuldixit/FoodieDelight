@@ -98,6 +98,11 @@ app.use("api/user/signin", (req: Request, res: Response) => {
 app.use("api/tag/addTag", (req: Request, res: Response) => {
   return TagRoutes.addTag(req, res);
 });
+
+// get all tags
+app.use("api/tag/getAll", (_: Request, res: Response) => {
+  return TagRoutes.getAllTags(_, res);
+});
 // **** Export default **** //
 
 export default app;

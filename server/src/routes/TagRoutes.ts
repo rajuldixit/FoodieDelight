@@ -19,4 +19,18 @@ const addTag = async (req: IReq<{ tag: ITag }>, res: IRes) => {
   }
 };
 
-export default { addTag } as const;
+/**
+ *  @desc get all tags
+ */
+const getAllTags = async (_: IReq, res: IRes) => {
+  try {
+    const tags = await TagService.getAllTags();
+    return res.status(HttpStatusCodes.OK).json({ tags });
+  } catch (error) {
+    return res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ message: "Bad Request" });
+  }
+};
+
+export default { addTag, getAllTags } as const;
