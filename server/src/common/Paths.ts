@@ -10,7 +10,16 @@ export default {
     Get: "/getAll",
     Add: "/addResto",
     Delete: "/deleteResto/:id",
-    Search: "/search"
+    Search: "/search",
+    GetRestoByCategory: "/getRestoByCategory/:category",
+    GetRestoByTag: "/getRestoByTag/:tag"
+  },
+  Tags: {
+    Base: "/tag",
+    Get: "/getAll",
+    Add: "/addTag",
+    Delete: "/deleteTag/:id",
+    updateTag: "/updateTag/:id"
   },
   Login: {
     Base: "/user",

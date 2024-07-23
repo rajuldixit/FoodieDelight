@@ -4,6 +4,7 @@ import jetValidator from "jet-validator";
 import Paths from "../common/Paths";
 import RestoRoutes from "./RestoRoutes";
 import LoginRoutes from "./LoginRoutes";
+import TagRoutes from "./TagRoutes";
 
 // **** Variables **** //
 
@@ -20,6 +21,10 @@ const restoRouter = Router();
  */
 const signinRouter = Router();
 
+/**
+ *  Tags
+ */
+const tagRouter = Router();
 // Get all Resto
 
 restoRouter.get(Paths.Restaurants.Get, RestoRoutes.getAllResto);
@@ -35,17 +40,26 @@ restoRouter.delete(
   RestoRoutes.deleteResto
 );
 
-// Delete one user
+// search resto
 restoRouter.post(Paths.Restaurants.Search, RestoRoutes.filterResto);
+
+// get resto by tag
+restoRouter.get(Paths.Restaurants.GetRestoByTag, RestoRoutes.getRestoByTag);
 
 // Find user
 signinRouter.post(Paths.Login.Signin, LoginRoutes.signin);
+
+// Add Tag
+tagRouter.post(Paths.Tags.Add, TagRoutes.addTag);
 
 // Add RestoRouter
 apiRouter.use(Paths.Restaurants.Base, restoRouter);
 
 // Add LoginRouter
 apiRouter.use(Paths.Login.Base, signinRouter);
+
+// Add TagRouter
+apiRouter.use(Paths.Tags.Base, tagRouter);
 
 // **** Export default **** //
 

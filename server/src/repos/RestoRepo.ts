@@ -1,15 +1,111 @@
-import { IResto } from "@src/models/Resto";
+import { IRestaurant, IRestaurantsByTag, IResto } from "@src/models/Resto";
 import MockOrm from "./MockOrm";
+import RestoOwner from "@src/models/restoOwner.model";
+import Restaurant from "@src/models/restaurant.model";
 
 // ** Function ** //
 
 // Add New Restaurant
-const addResto = async (resto: IResto): Promise<void> => {
-  const db = await MockOrm.openRestoDB();
-  db.resto.push(resto);
-  return MockOrm.saveRestoDB(db);
+const addResto = async (restaurant: IRestaurant): Promise<object | string> => {
+  // const db = await MockOrm.openRestoDB();
+  // db.resto.push(resto);
+  // return MockOrm.saveRestoDB(db);
+  // const
+  console.log("Resto to save :", restaurant);
+  try {
+    const { details, menu, owner } = restaurant;
+
+    const ownerExist = await RestoOwner.findOne({ email: owner.email });
+    let ownerId;
+    if (!ownerExist) {
+      const newOwner = new RestoOwner({
+        email: owner.email,
+        name: owner.name,
+        phone: owner.phone
+      });
+      const savedOwner = await newOwner.save();
+      ownerId = savedOwner._id;
+    } else {
+      ownerId = ownerExist._id;
+    }
+
+    const newRestuarent = new Restaurant({
+      details,
+      menu,
+      owner: ownerId
+    });
+    return await newRestuarent.save();
+  } catch (error) {
+    return "Error while saving in db";
+  }
 };
 
+/**
+ *  @desc get resto by tag
+ */
+const getRestoByTag = async (
+  tagId: string
+): Promise<IRestaurantsByTag[] | string> => {
+  try {
+    const restaurants = await Restaurant.aggregate([
+      {
+        $project: {
+          details: {
+            category: 1,
+            name: 1,
+            rating: 1,
+            address: 1
+          },
+          menu: 1
+        }
+      },
+      {
+        $match: {
+          "menu.tags": "Paneer"
+        }
+      },
+      {
+        $unwind: "$menu"
+      },
+      {
+        $unwind: "$menu.tags"
+      },
+      {
+        $match: {
+          "menu.tags": "Paneer"
+        }
+      },
+      {
+        $group: {
+          _id: "$_id",
+          name: {
+            $first: "$details.name"
+          },
+          category: {
+            $first: "$details.category"
+          },
+          rating: {
+            $first: "$details.rating"
+          },
+          address: {
+            $first: "$details.address"
+          },
+          menu: {
+            $push: {
+              name: "$menu.name",
+              rating: "$menu.rating",
+              price: "$menu.price",
+              description: "$menu.description"
+            }
+          }
+        }
+      }
+    ]);
+    return restaurants;
+  } catch (error) {
+    return "Error while saving in db";
+  }
+};
 /**
  *  Get all Resto
  */
@@ -64,6 +160,7 @@ export default {
   addResto,
   getAllResto,
   persists,
+  getRestoByTag,
   deleteResto: delete_,
   filterResto: filter_
 } as const;

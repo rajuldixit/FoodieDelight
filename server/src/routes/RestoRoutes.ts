@@ -1,5 +1,5 @@
 import HttpStatusCodes from "@src/common/HttpStatusCodes";
-import { IResto } from "@src/models/Resto";
+import { IRestaurant, IResto } from "@src/models/Resto";
 import { IRes } from "@src/routes/types/express/misc";
 import { IReq } from "@src/routes/types/types";
 import RestoService from "@src/services/RestoService";
@@ -18,12 +18,18 @@ const getAllResto = async (_: IReq, res: IRes) => {
  *  Add new Resto
  */
 
-const addResto = async (req: IReq<{ resto: IResto }>, res: IRes) => {
-  const { resto } = req.body;
-  await RestoService.addResto(resto);
-  return res
-    .status(HttpStatusCodes.CREATED)
-    .json({ message: "Successfully created !" });
+const addResto = async (req: IReq<{ restaurant: IRestaurant }>, res: IRes) => {
+  const { restaurant } = req.body;
+  try {
+    await RestoService.addResto(restaurant);
+    return res
+      .status(HttpStatusCodes.CREATED)
+      .json({ message: "Successfully created !" });
+  } catch (error) {
+    return res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ message: "Bad Request" });
+  }
 };
 
 /**
@@ -47,10 +53,25 @@ const filter_ = async (
   return res.status(HttpStatusCodes.OK).json({ restoData });
 };
 
+/**
+ *  @desc get resto by tag
+ */
+
+const getRestoByTag = async (req: IReq, res: IRes) => {
+  const tagId = req.params.tag;
+  try {
+    const resp = await RestoService.getRestoByTag(tagId);
+    return res.status(HttpStatusCodes.OK).json({ resp });
+  } catch (error) {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
+  }
+};
+
 // **** export default **** //
 export default {
   getAllResto,
   addResto,
+  getRestoByTag,
   deleteResto: delete_,
   filterResto: filter_
 } as const;

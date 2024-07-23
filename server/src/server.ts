@@ -20,6 +20,7 @@ import RouteError from "@src/common/RouteError";
 import { NodeEnvs } from "@src/common/misc";
 import RestoRoutes from "./routes/RestoRoutes";
 import LoginRoutes from "./routes/LoginRoutes";
+import TagRoutes from "./routes/TagRoutes";
 const cors = require("cors");
 // **** Variables **** //
 
@@ -81,14 +82,22 @@ app.use("api/resto/deleteResto/:id", (req: Request, res: Response) => {
 app.use("api/resto/search", (req: Request, res: Response) => {
   return RestoRoutes.filterResto(req, res);
 });
+// get Resto by tag
+app.use("api/resto/getRestoByTag/:tag", (req: Request, res: Response) => {
+  console.log("in get resto by tag");
+  return RestoRoutes.getRestoByTag(req, res);
+});
 
 // user signin
 
 app.use("api/user/signin", (req: Request, res: Response) => {
-  console.log("in api signin");
   return LoginRoutes.signin(req, res);
 });
 
+// add tag
+app.use("api/tag/addTag", (req: Request, res: Response) => {
+  return TagRoutes.addTag(req, res);
+});
 // **** Export default **** //
 
 export default app;

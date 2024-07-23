@@ -1,6 +1,6 @@
 import HttpStatusCodes from "@src/common/HttpStatusCodes";
 import RouteError from "@src/common/RouteError";
-import { IResto } from "@src/models/Resto";
+import { IRestaurant, IRestaurantsByTag, IResto } from "@src/models/Resto";
 import RestoRepo from "@src/repos/RestoRepo";
 
 // **** Variables **** //
@@ -16,7 +16,7 @@ const getAll = (): Promise<IResto[]> => {
   return RestoRepo.getAllResto();
 };
 
-const addResto = (resto: IResto): Promise<void> => {
+const addResto = (resto: IRestaurant): Promise<object | string> => {
   return RestoRepo.addResto(resto);
 };
 
@@ -45,11 +45,23 @@ const _filter = async (params: {
   return RestoRepo.filterResto(params);
 };
 
+/**
+ *  @desc get resto by tag
+ */
+const getRestoByTag = async (
+  params: string
+): Promise<IRestaurantsByTag[] | string> => {
+  if (!!!params) {
+    throw new RouteError(HttpStatusCodes.NOT_FOUND, RESTO_NOT_FOUND_ERR);
+  }
+  return RestoRepo.getRestoByTag(params);
+};
 // Export Default
 
 export default {
   getAll,
   addResto,
+  getRestoByTag,
   deleteResto: _delete,
   filterResto: _filter
 } as const;

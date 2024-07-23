@@ -37,6 +37,49 @@ export interface IResto {
   menuDetails: IRestoMenuDetails;
 }
 
+export interface IOwner {
+  name: string;
+  email: string;
+  phone: string;
+}
+export interface IMenu {
+  name: string;
+  price: string;
+  description: string;
+  rating: number;
+}
+
+export interface IRestaurant {
+  details: {
+    name: string;
+    description: string;
+    rating: string;
+    registrationNo: string;
+    category: string;
+    address: {
+      city: string;
+      street: string;
+      pincode: string;
+    };
+  };
+  owner: IOwner;
+  menu: IMenu[];
+}
+
+export interface IRestaurantsByTag {
+  details: {
+    name: string;
+    description: string;
+    rating: string;
+    category: string;
+    address: {
+      city: string;
+      street: string;
+      pincode: string;
+    };
+  };
+  menu: IMenu[];
+}
 // ** Functions ** //
 
 const new_ = (resto: IResto) => {
