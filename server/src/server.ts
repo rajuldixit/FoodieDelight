@@ -20,7 +20,6 @@ import RouteError from "@src/common/RouteError";
 import { NodeEnvs } from "@src/common/misc";
 import RestoRoutes from "./routes/RestoRoutes";
 import LoginRoutes from "./routes/LoginRoutes";
-
 const cors = require("cors");
 // **** Variables **** //
 
@@ -29,7 +28,6 @@ const app = express();
 // **** Setup **** //
 
 // Basic middleware
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(EnvVars.CookieProps.Secret));
@@ -68,14 +66,6 @@ app.use(
     return res.status(status).json({ error: err.message });
   }
 );
-
-// Set views directory (html)
-const viewsDir = path.join(__dirname, "views");
-app.set("views", viewsDir);
-
-// Set static directory (js and css).
-const staticDir = path.join(__dirname, "public");
-app.use(express.static(staticDir));
 
 app.use("api/resto/getAll", (_: Request, res: Response) => {
   return RestoRoutes.getAllResto(_, res);
