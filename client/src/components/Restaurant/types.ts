@@ -19,3 +19,24 @@ export type RestoCardProps = {
     { name: string; price: string; rating?: string; description?: string }
   ];
 };
+
+export interface IMenu {
+  name: string;
+  price: string;
+  description: string;
+  rating: number;
+}
+export interface IRestaurantsByTag {
+  details: {
+    name: string;
+    description: string;
+    rating: string;
+    category: string;
+    address: {
+      city: string;
+      street: string;
+      pincode: string;
+    };
+  };
+  menu: IMenu[];
+}

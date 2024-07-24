@@ -12,7 +12,7 @@ export const RESTO_NOT_FOUND_ERR = "Resto not found";
  *  Get all resto
  */
 
-const getAll = (): Promise<IResto[]> => {
+const getAll = (): Promise<IRestaurantsByTag[] | string> => {
   return RestoRepo.getAllResto();
 };
 

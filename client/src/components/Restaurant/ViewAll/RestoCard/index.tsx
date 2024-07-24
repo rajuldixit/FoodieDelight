@@ -14,7 +14,7 @@ import {
   READ_MORE,
   Roles
 } from "../../../../utils/constants";
-import { RestoCardProps } from "../../types";
+import { IRestaurantsByTag, RestoCardProps } from "../../types";
 import { useAuth } from "context/AuthContext";
 import { useEffect } from "react";
 
@@ -25,7 +25,7 @@ const RestoCard = ({
   onEdit,
   onDelete
 }: {
-  resto: RestoCardProps;
+  resto: IRestaurantsByTag;
   index: number;
   onClick: () => void;
   onEdit: () => void;
@@ -36,10 +36,10 @@ const RestoCard = ({
   return (
     <Card>
       <CardHeader className="flex justify-between">
-        <h6>{resto?.basicDetails?.name}</h6>
-        {resto?.basicDetails?.category === FoodCategory.VEG ? (
+        <h6>{resto?.details?.name}</h6>
+        {resto?.details?.category === FoodCategory.VEG ? (
           <div className="rounded-circle bg-success w-4 h-4"></div>
-        ) : resto.basicDetails.category === FoodCategory.NON_VEG ? (
+        ) : resto.details.category === FoodCategory.NON_VEG ? (
           <div className="rounded-circle bg-danger w-4 h-4"></div>
         ) : (
           <div className="rounded-circle bg-warning w-4 h-4"></div>
@@ -47,7 +47,7 @@ const RestoCard = ({
       </CardHeader>
       <CardBody>
         {index % 2 === 0 ? <img src={FoodImage} /> : <img src={FoodImage2} />}
-        <p>{resto.basicDetails.description}</p>
+        <p>{resto.details.description}</p>
       </CardBody>
       <CardFooter className="flex justify-between cursor-pointer">
         {user && user.role === Roles.ADMIN && (

@@ -8,11 +8,6 @@ import Tag from "@src/models/tag.model";
 
 // Add New Restaurant
 const addResto = async (restaurant: IRestaurant): Promise<object | string> => {
-  // const db = await MockOrm.openRestoDB();
-  // db.resto.push(resto);
-  // return MockOrm.saveRestoDB(db);
-  // const
-  console.log("Resto to save :", restaurant);
   try {
     const { details, menu, owner } = restaurant;
 
@@ -108,9 +103,28 @@ const getRestoByTag = async (
 /**
  *  Get all Resto
  */
-const getAllResto = async (): Promise<IResto[]> => {
-  const db = await MockOrm.openRestoDB();
-  return db.resto;
+const getAllResto = async (): Promise<IRestaurantsByTag[] | string> => {
+  // const db = await MockOrm.openRestoDB();
+  // return db.resto;
+  try {
+    const restaurants = await Restaurant.aggregate([
+      {
+        $project: {
+          details: {
+            category: 1,
+            name: 1,
+            rating: 1,
+            address: 1
+          },
+          menu: 1
+        }
+      }
+    ]);
+    console.log(restaurants);
+    return restaurants;
+  } catch (error) {
+    return "Error while saving in db";
+  }
 };
 /**
  * See if a resto with the given id exists.
