@@ -80,6 +80,7 @@ export interface IRestaurantsByTag {
   };
   menu: IMenu[];
 }
+
 // ** Functions ** //
 
 const new_ = (resto: IResto) => {

@@ -5,6 +5,7 @@ const Footer = () => {
       <h6>
         {APP_NAME} &copy;{FOOTER_TEXT}
       </h6>
+      <h6>languages</h6>
     </div>
   );
 };
